@@ -79,7 +79,7 @@ class Main extends React.Component {
     });
     api.getBio(this.state.username)
       .then((response) => {
-        if(response.message === 'Not found') {
+        if(response.message === 'Not Found') {
           this.setState({
             error: 'User not found',
             isLoading: false
@@ -100,6 +100,10 @@ class Main extends React.Component {
   }
 
   render() {
+    var showError = (
+      this.state.error ? <Text>{ this.state.error }</Text> : <View></View>
+    );
+
     return (
       <View style={styles.mainContainer}>
         <Text style={styles.title}>Search for a Github user</Text>
@@ -117,6 +121,13 @@ class Main extends React.Component {
             <Text style={styles.buttonText}>SEARCH</Text>
 
         </TouchableHighlight>
+
+        <ActivityIndicatorIOS
+          animating={ this.state.isLoading }
+          color="#111"
+          size="large" />
+
+        { showError }
       </View>
     );
   }
