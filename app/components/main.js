@@ -1,5 +1,7 @@
 var React = require('react-native');
 
+var api = require('./../util/api');
+
 var {
   View,
   Text,
@@ -73,7 +75,26 @@ class Main extends React.Component {
     this.setState({
       isLoading: true
     });
-    console.log('submit', this.state.username);
+    api.getBio(this.state.username)
+      .then((response) => {
+        if(response.message === 'Not found') {
+          this.setState({
+            error: 'User not found',
+            isLoading: false
+          });
+        } else {
+          this.props.navigator.push({
+            title: response.name || 'Select an Option',
+            component: Dashboard,
+            passProps: { userInfo: response }
+          });
+          this.setState({
+            isLoading: false,
+            error: false,
+            username: ''
+          });
+        }
+      });
   }
 
   render() {
