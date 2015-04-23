@@ -11,6 +11,8 @@ var {
   StyleSheet
 } = React;
 
+var Dashboard = require('./dashboard');
+
 var styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
@@ -84,7 +86,7 @@ class Main extends React.Component {
           });
         } else {
           this.props.navigator.push({
-            title: response.name || 'Select an Option',
+            title: response.name || response.login || 'Select an Option',
             component: Dashboard,
             passProps: { userInfo: response }
           });
