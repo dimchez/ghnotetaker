@@ -3,6 +3,9 @@ var React = require('react-native');
 var {
   View,
   Text,
+  TextInput,
+  TouchableHighlight,
+  ActivityIndicatorIOS,
   StyleSheet
 } = React;
 
@@ -51,12 +54,46 @@ var styles = StyleSheet.create({
 });
 
 class Main extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      isLoading: false,
+      error: false
+    };
+  }
+
+  onChange(event) {
+    this.setState({
+      username: event.nativeEvent.text
+    });
+  }
+
+  submit() {
+    this.setState({
+      isLoading: true
+    });
+    console.log('submit', this.state.username);
+  }
+
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Text>
-          Testing the router
-        </Text>
+        <Text style={styles.title}>Search for a Github user</Text>
+
+        <TextInput
+          style={styles.searchInput} 
+          value={this.state.username} 
+          onChange={this.onChange.bind(this)} />
+
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.submit.bind(this)}
+          underlayColor="white">
+
+            <Text style={styles.buttonText}>SEARCH</Text>
+
+        </TouchableHighlight>
       </View>
     );
   }
