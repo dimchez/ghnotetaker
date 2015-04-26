@@ -10,6 +10,7 @@ var {
 
 var Profile = require('./profile');
 var Repositories = require('./repositories');
+var Notes = require('./notes');
 var api = require('./../util/api');
 
 var styles = StyleSheet.create({
@@ -56,20 +57,31 @@ class Dashboard extends React.Component {
   }
 
   goToRepos() {
-    api.getRepos(this.props.userInfo.login).then((repos) => {
-      this.props.navigator.push({
-        title: 'Repos',
-        component: Repositories,
-        passProps: { 
-          userInfo: this.props.userInfo,
-          repos: repos
-        }
+    api.getRepos(this.props.userInfo.login)
+      .then((repos) => {
+        this.props.navigator.push({
+          title: 'Repos',
+          component: Repositories,
+          passProps: { 
+            userInfo: this.props.userInfo,
+            repos: repos || []
+          }
+        });
       });
-    });
   }
 
   goToNotes() {
-    console.log('goToNotes');
+    api.getNotes(this.props.userInfo.login)
+      .then((notes) => {
+        this.props.navigator.push({
+          title: 'Notes',
+          component: Notes,
+          passProps: { 
+            userInfo: this.props.userInfo,
+            notes: notes || {}
+          }
+        });
+      });
   }
 
   render() {

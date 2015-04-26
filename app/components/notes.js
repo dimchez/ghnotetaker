@@ -117,7 +117,7 @@ class Notes extends React.Component {
 
   renderHeader() {
     return (
-      <Badge userInfo={ this.props.userInfo } />}
+      <Badge userInfo={ this.props.userInfo } />
     );
   }
 
@@ -127,7 +127,7 @@ class Notes extends React.Component {
         <ListView
           dataSource={ this.state.dataSource }
           renderRow={ this.renderRow } 
-          renderHeader={ this.renderHeader } />
+          renderHeader={ this.renderHeader.bind(this) } />
         { this.footer() }
       </View>
     );
