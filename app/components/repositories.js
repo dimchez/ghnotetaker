@@ -10,6 +10,7 @@ var {
 
 var Badge = require('./badge');
 var Separator = require('./helpers/separator');
+var WebView = require('./helpers/webview');
 
 var styles = StyleSheet.create({
   container: {
@@ -38,7 +39,11 @@ var styles = StyleSheet.create({
 
 class Respositories extends React.Component {
   openPage(url) {
-    console.log(url);
+    this.props.navigator.push({
+      component: WebView,
+      title: 'Web View',
+      passProps: { url }
+    });
   }
 
   render() {
