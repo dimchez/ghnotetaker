@@ -9,6 +9,19 @@ var api = {
     username = username.toLowerCase().trim();
     var url = `https://api.github.com/users/${username}/repos`;
     return fetch(url).then((response) => response.json());
+  },
+  getNotes(username) {
+    username = username.toLowerCase().trim();
+    var url = `https://gh-note-taker.firebaseio.com/${username}.json`;
+    return fetch(url).then((response) => response.json());
+  },
+  addNote(username, note) {
+    username = username.toLowerCase().trim();
+    var url = `https://gh-note-taker.firebaseio.com/${username}.json`;
+    return fetch(url, {
+      method: 'post',
+      body: JSON.stringify(note)
+    }).then((response) => response.json());
   }
 };
 
