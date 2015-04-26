@@ -8,6 +8,8 @@ var {
   StyleSheet
 } = React;
 
+var Profile = require('./profile');
+
 var styles = StyleSheet.create({
   container: {
     marginTop: 65,
@@ -44,7 +46,11 @@ class Dashboard extends React.Component {
   }
 
   goToProfile() {
-    console.log('goToProfile');
+    this.props.navigator.push({
+      title: 'Profile',
+      component: Profile,
+      passProps: { userInfo: this.props.userInfo }
+    });
   }
 
   goToRepos() {
