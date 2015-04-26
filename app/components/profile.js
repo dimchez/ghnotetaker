@@ -8,6 +8,7 @@ var {
 } = React;
 
 var Badge = require('./badge');
+var Separator = require('./helpers/separator');
 
 var styles = StyleSheet.create({
   container: {
@@ -51,6 +52,7 @@ class Profile extends React.Component {
               <Text style={styles.rowTitle}>{ this.getRowTitle(userInfo, item) }</Text>
               <Text style={styles.rowContent}>{ userInfo[item] }</Text>
             </View>
+            <Separator />
           </View>
         );
       }
