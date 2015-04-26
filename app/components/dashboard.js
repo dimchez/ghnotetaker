@@ -9,6 +9,8 @@ var {
 } = React;
 
 var Profile = require('./profile');
+var Repositories = require('./repositories');
+var api = require('./../util/api');
 
 var styles = StyleSheet.create({
   container: {
@@ -54,7 +56,16 @@ class Dashboard extends React.Component {
   }
 
   goToRepos() {
-    console.log('goToRepos');
+    api.getRepos(this.props.userInfo.login).then((repos) => {
+      this.props.navigator.push({
+        title: 'Repos',
+        component: Repositories,
+        passProps: { 
+          userInfo: this.props.userInfo,
+          repos: repos
+        }
+      });
+    });
   }
 
   goToNotes() {

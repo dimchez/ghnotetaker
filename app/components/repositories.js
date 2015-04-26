@@ -3,7 +3,7 @@ var React = require('react-native');
 var {
   Text,
   View,
-  TouchableHightlight,
+  TouchableHighlight,
   ScrollView,
   StyleSheet
 } = React;
@@ -44,15 +44,15 @@ class Respositories extends React.Component {
   render() {
     var repos = this.props.repos;
     var list = repos.map((item, index) => {
-      var desc = repos[index].description ? <Text style={styles.description}>{ repos[index].description }</Text> : <View />;
+      var desc = repos[index].description ? <Text style={ styles.description }>{ repos[index].description }</Text> : <View />;
       return (
-        <View key={index}>
-          <View style={ styles.container }>
-            <TouchableHightlight 
-              onPress={ this.openPage.bind(this, respos[index].html_url) }
+        <View key={ index }>
+          <View style={ styles.rowContainer }>
+            <TouchableHighlight 
+              onPress={ this.openPage.bind(this, repos[index].html_url) }
               underlayColor='transparent'>
-                <Text style={styles.name}>{ repos[index].name }</Text>
-            </TouchableHightlight>
+                <Text style={ styles.name }>{ repos[index].name }</Text>
+            </TouchableHighlight>
             <Text style={ styles.stars }>Stars: { repos[index].stargazers_count }</Text>
             { desc }
           </View>
@@ -62,7 +62,7 @@ class Respositories extends React.Component {
     });
 
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={ styles.container }>
         <Badge userInfo={ this.props.userInfo } />
         { list }
       </ScrollView>
